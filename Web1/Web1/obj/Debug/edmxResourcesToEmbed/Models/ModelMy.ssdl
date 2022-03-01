@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище BeautyShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Middle" Type="varchar" MaxLength="45" />
+    <Property Name="Birhdate" Type="date" />
+    <Property Name="Email" Type="varchar" MaxLength="255" />
+    <Property Name="Phone" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Middle" Type="varchar" MaxLength="45" />
+    <Property Name="Phone" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Birhdate" Type="date" />
+    <Property Name="Post" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Record">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Services" Type="int" Nullable="false" />
+    <Property Name="Id_Employee" Type="int" Nullable="false" />
+    <Property Name="Id_Clients" Type="int" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Services" Type="int" Nullable="false" />
+    <Property Name="Id_Employee" Type="int" Nullable="false" />
+    <Property Name="Id_Clients" Type="int" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Income" Type="float" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__Record__Id_Clien__2A4B4B5E">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="Record" Type="Self.Record" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Record">
+        <PropertyRef Name="Id_Clients" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Record__Id_Emplo__2C3393D0">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Record" Type="Self.Record" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Record">
+        <PropertyRef Name="Id_Employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Record__Id_Servi__2B3F6F97">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="Record" Type="Self.Record" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Record">
+        <PropertyRef Name="Id_Services" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Work__Id_Clients__2F10007B">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="Work" Type="Self.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="Id_Clients" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Work__Id_Employe__30F848ED">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Work" Type="Self.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="Id_Employee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Work__Id_Service__300424B4">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="Work" Type="Self.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="Id_Services" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Clients_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Clients_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Clients_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inSurname" Type="varchar" Mode="In" />
+    <Parameter Name="inName" Type="varchar" Mode="In" />
+    <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+    <Parameter Name="inBirhdate" Type="date" Mode="In" />
+    <Parameter Name="inEmail" Type="varchar" Mode="In" />
+    <Parameter Name="inPhone" Type="decimal" Mode="In" />
+    <Parameter Name="inComment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Clients_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Clients_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inId" Type="int" Mode="In" />
+    <Parameter Name="inSurname" Type="varchar" Mode="In" />
+    <Parameter Name="inName" Type="varchar" Mode="In" />
+    <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+    <Parameter Name="inBirhdate" Type="date" Mode="In" />
+    <Parameter Name="inEmail" Type="varchar" Mode="In" />
+    <Parameter Name="inPhone" Type="decimal" Mode="In" />
+    <Parameter Name="inComment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Employee_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Employee_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Employee_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inSurname" Type="varchar" Mode="In" />
+    <Parameter Name="inName" Type="varchar" Mode="In" />
+    <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+    <Parameter Name="inPhone" Type="decimal" Mode="In" />
+    <Parameter Name="inBirhdate" Type="date" Mode="In" />
+    <Parameter Name="inPost" Type="varchar" Mode="In" />
+    <Parameter Name="inComment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Employee_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Employee_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="inId" Type="int" Mode="In" />
+    <Parameter Name="inSurname" Type="varchar" Mode="In" />
+    <Parameter Name="inName" Type="varchar" Mode="In" />
+    <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+    <Parameter Name="inBirhdate" Type="date" Mode="In" />
+    <Parameter Name="inPost" Type="varchar" Mode="In" />
+    <Parameter Name="inPhone" Type="decimal" Mode="In" />
+    <Parameter Name="inComment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Generation_Email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="resultEmail" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="Record_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Record_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Record_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id_services" Type="int" Mode="In" />
+    <Parameter Name="Id_Employee" Type="int" Mode="In" />
+    <Parameter Name="Id_Clients" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Time" Type="time" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Record_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Record_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Id_services" Type="int" Mode="In" />
+    <Parameter Name="Id_Employee" Type="int" Mode="In" />
+    <Parameter Name="Id_Clients" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Time" Type="time" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Services_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Services_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+    <Parameter Name="Price" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Services_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Services_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+    <Parameter Name="Price" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="year" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="letter" Type="char" Mode="In" />
+  </Function>
+  <Function Name="Work_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Work_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="key" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Work_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id_services" Type="int" Mode="In" />
+    <Parameter Name="Id_Employee" Type="int" Mode="In" />
+    <Parameter Name="Id_Clients" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Time" Type="time" Mode="In" />
+    <Parameter Name="Income" Type="float" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Work_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Work_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Id_services" Type="int" Mode="In" />
+    <Parameter Name="Id_Employee" Type="int" Mode="In" />
+    <Parameter Name="Id_Clients" Type="int" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Time" Type="time" Mode="In" />
+    <Parameter Name="Income" Type="float" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище BeautyShopModelContainer">
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Record__Id_Clien__2A4B4B5E" Association="Self.FK__Record__Id_Clien__2A4B4B5E">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Record" EntitySet="Record" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Record__Id_Emplo__2C3393D0" Association="Self.FK__Record__Id_Emplo__2C3393D0">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Record" EntitySet="Record" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Record__Id_Servi__2B3F6F97" Association="Self.FK__Record__Id_Servi__2B3F6F97">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Record" EntitySet="Record" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Work__Id_Clients__2F10007B" Association="Self.FK__Work__Id_Clients__2F10007B">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Work__Id_Employe__30F848ED" Association="Self.FK__Work__Id_Employe__30F848ED">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Work__Id_Service__300424B4" Association="Self.FK__Work__Id_Service__300424B4">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

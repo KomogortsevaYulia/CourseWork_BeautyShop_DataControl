@@ -1,0 +1,903 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BeautyShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Middle" Type="varchar" MaxLength="45" />
+          <Property Name="Birhdate" Type="date" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="Phone" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Middle" Type="varchar" MaxLength="45" />
+          <Property Name="Phone" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Birhdate" Type="date" />
+          <Property Name="Post" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Services" Type="int" Nullable="false" />
+          <Property Name="Id_Employee" Type="int" Nullable="false" />
+          <Property Name="Id_Clients" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Services" Type="int" Nullable="false" />
+          <Property Name="Id_Employee" Type="int" Nullable="false" />
+          <Property Name="Id_Clients" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Income" Type="float" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Record__Id_Clien__2A4B4B5E">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="Id_Clients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Record__Id_Emplo__2C3393D0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Record__Id_Servi__2B3F6F97">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="Id_Services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Work__Id_Clients__2F10007B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="Id_Clients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Work__Id_Employe__30F848ED">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Work__Id_Service__300424B4">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="Id_Services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Clients_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Clients_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Clients_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="inSurname" Type="varchar" Mode="In" />
+          <Parameter Name="inName" Type="varchar" Mode="In" />
+          <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+          <Parameter Name="inBirhdate" Type="date" Mode="In" />
+          <Parameter Name="inEmail" Type="varchar" Mode="In" />
+          <Parameter Name="inPhone" Type="decimal" Mode="In" />
+          <Parameter Name="inComment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Clients_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Clients_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="inId" Type="int" Mode="In" />
+          <Parameter Name="inSurname" Type="varchar" Mode="In" />
+          <Parameter Name="inName" Type="varchar" Mode="In" />
+          <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+          <Parameter Name="inBirhdate" Type="date" Mode="In" />
+          <Parameter Name="inEmail" Type="varchar" Mode="In" />
+          <Parameter Name="inPhone" Type="decimal" Mode="In" />
+          <Parameter Name="inComment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Employee_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Employee_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Employee_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="inSurname" Type="varchar" Mode="In" />
+          <Parameter Name="inName" Type="varchar" Mode="In" />
+          <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+          <Parameter Name="inPhone" Type="decimal" Mode="In" />
+          <Parameter Name="inBirhdate" Type="date" Mode="In" />
+          <Parameter Name="inPost" Type="varchar" Mode="In" />
+          <Parameter Name="inComment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Employee_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Employee_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="inId" Type="int" Mode="In" />
+          <Parameter Name="inSurname" Type="varchar" Mode="In" />
+          <Parameter Name="inName" Type="varchar" Mode="In" />
+          <Parameter Name="inMiddle" Type="varchar" Mode="In" />
+          <Parameter Name="inBirhdate" Type="date" Mode="In" />
+          <Parameter Name="inPost" Type="varchar" Mode="In" />
+          <Parameter Name="inPhone" Type="decimal" Mode="In" />
+          <Parameter Name="inComment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Generation_Email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="resultEmail" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="Record_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Record_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Record_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_services" Type="int" Mode="In" />
+          <Parameter Name="Id_Employee" Type="int" Mode="In" />
+          <Parameter Name="Id_Clients" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Time" Type="time" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Record_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Record_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Id_services" Type="int" Mode="In" />
+          <Parameter Name="Id_Employee" Type="int" Mode="In" />
+          <Parameter Name="Id_Clients" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Time" Type="time" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Services_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Services_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+          <Parameter Name="Price" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Services_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Services_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+          <Parameter Name="Price" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="letter" Type="char" Mode="In" />
+        </Function>
+        <Function Name="Work_AUTO_GENERATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Work_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Work_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_services" Type="int" Mode="In" />
+          <Parameter Name="Id_Employee" Type="int" Mode="In" />
+          <Parameter Name="Id_Clients" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Time" Type="time" Mode="In" />
+          <Parameter Name="Income" Type="float" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Work_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Work_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Id_services" Type="int" Mode="In" />
+          <Parameter Name="Id_Employee" Type="int" Mode="In" />
+          <Parameter Name="Id_Clients" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Time" Type="time" Mode="In" />
+          <Parameter Name="Income" Type="float" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище BeautyShopModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Record__Id_Clien__2A4B4B5E" Association="Self.FK__Record__Id_Clien__2A4B4B5E">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Record__Id_Emplo__2C3393D0" Association="Self.FK__Record__Id_Emplo__2C3393D0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Record__Id_Servi__2B3F6F97" Association="Self.FK__Record__Id_Servi__2B3F6F97">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Work__Id_Clients__2F10007B" Association="Self.FK__Work__Id_Clients__2F10007B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Work__Id_Employe__30F848ED" Association="Self.FK__Work__Id_Employe__30F848ED">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Work__Id_Service__300424B4" Association="Self.FK__Work__Id_Service__300424B4">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BeautyShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Birhdate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__Record__Id_Clien__2A4B4B5E" FromRole="Clients" ToRole="Record" />
+          <NavigationProperty Name="Work" Relationship="Self.FK__Work__Id_Clients__2F10007B" FromRole="Clients" ToRole="Work" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Birhdate" Type="DateTime" Precision="0" />
+          <Property Name="Post" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__Record__Id_Emplo__2C3393D0" FromRole="Employee" ToRole="Record" />
+          <NavigationProperty Name="Work" Relationship="Self.FK__Work__Id_Employe__30F848ED" FromRole="Employee" ToRole="Work" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Services" Type="Int32" Nullable="false" />
+          <Property Name="Id_Employee" Type="Int32" Nullable="false" />
+          <Property Name="Id_Clients" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Record__Id_Clien__2A4B4B5E" FromRole="Record" ToRole="Clients" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Record__Id_Emplo__2C3393D0" FromRole="Record" ToRole="Employee" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__Record__Id_Servi__2B3F6F97" FromRole="Record" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Record" Relationship="Self.FK__Record__Id_Servi__2B3F6F97" FromRole="Services" ToRole="Record" />
+          <NavigationProperty Name="Work" Relationship="Self.FK__Work__Id_Service__300424B4" FromRole="Services" ToRole="Work" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Services" Type="Int32" Nullable="false" />
+          <Property Name="Id_Employee" Type="Int32" Nullable="false" />
+          <Property Name="Id_Clients" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Income" Type="Double" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Work__Id_Clients__2F10007B" FromRole="Work" ToRole="Clients" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Work__Id_Employe__30F848ED" FromRole="Work" ToRole="Employee" />
+          <NavigationProperty Name="Services" Relationship="Self.FK__Work__Id_Service__300424B4" FromRole="Work" ToRole="Services" />
+        </EntityType>
+        <Association Name="FK__Record__Id_Clien__2A4B4B5E">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="Id_Clients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Work__Id_Clients__2F10007B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="Id_Clients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Record__Id_Emplo__2C3393D0">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Work__Id_Employe__30F848ED">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Record__Id_Servi__2B3F6F97">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="Id_Services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Work__Id_Service__300424B4">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="Id_Services" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BeautyShopEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Record" EntityType="Self.Record" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="Work" EntityType="Self.Work" />
+          <AssociationSet Name="FK__Record__Id_Clien__2A4B4B5E" Association="Self.FK__Record__Id_Clien__2A4B4B5E">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Work__Id_Clients__2F10007B" Association="Self.FK__Work__Id_Clients__2F10007B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Record__Id_Emplo__2C3393D0" Association="Self.FK__Record__Id_Emplo__2C3393D0">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Work__Id_Employe__30F848ED" Association="Self.FK__Work__Id_Employe__30F848ED">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Record__Id_Servi__2B3F6F97" Association="Self.FK__Record__Id_Servi__2B3F6F97">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Work__Id_Service__300424B4" Association="Self.FK__Work__Id_Service__300424B4">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+          <FunctionImport Name="Clients_AUTO_GENERATION" />
+          <FunctionImport Name="Clients_DELETE">
+            <Parameter Name="key" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Clients_INSERT">
+            <Parameter Name="inSurname" Mode="In" Type="String" />
+            <Parameter Name="inName" Mode="In" Type="String" />
+            <Parameter Name="inMiddle" Mode="In" Type="String" />
+            <Parameter Name="inBirhdate" Mode="In" Type="DateTime" />
+            <Parameter Name="inEmail" Mode="In" Type="String" />
+            <Parameter Name="inPhone" Mode="In" Type="Decimal" />
+            <Parameter Name="inComment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Clients_SELECT" ReturnType="Collection(BeautyShopModel.Clients_SELECT_Result)" />
+          <FunctionImport Name="Clients_UPDATE">
+            <Parameter Name="inId" Mode="In" Type="Int32" />
+            <Parameter Name="inSurname" Mode="In" Type="String" />
+            <Parameter Name="inName" Mode="In" Type="String" />
+            <Parameter Name="inMiddle" Mode="In" Type="String" />
+            <Parameter Name="inBirhdate" Mode="In" Type="DateTime" />
+            <Parameter Name="inEmail" Mode="In" Type="String" />
+            <Parameter Name="inPhone" Mode="In" Type="Decimal" />
+            <Parameter Name="inComment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_AUTO_GENERATION" />
+          <FunctionImport Name="Employee_DELETE">
+            <Parameter Name="key" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_INSERT">
+            <Parameter Name="inSurname" Mode="In" Type="String" />
+            <Parameter Name="inName" Mode="In" Type="String" />
+            <Parameter Name="inMiddle" Mode="In" Type="String" />
+            <Parameter Name="inPhone" Mode="In" Type="Decimal" />
+            <Parameter Name="inBirhdate" Mode="In" Type="DateTime" />
+            <Parameter Name="inPost" Mode="In" Type="String" />
+            <Parameter Name="inComment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_SELECT" ReturnType="Collection(BeautyShopModel.Employee_SELECT_Result)" />
+          <FunctionImport Name="Employee_UPDATE">
+            <Parameter Name="inId" Mode="In" Type="Int32" />
+            <Parameter Name="inSurname" Mode="In" Type="String" />
+            <Parameter Name="inName" Mode="In" Type="String" />
+            <Parameter Name="inMiddle" Mode="In" Type="String" />
+            <Parameter Name="inBirhdate" Mode="In" Type="DateTime" />
+            <Parameter Name="inPost" Mode="In" Type="String" />
+            <Parameter Name="inPhone" Mode="In" Type="Decimal" />
+            <Parameter Name="inComment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Generation_Email">
+            <Parameter Name="resultEmail" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Record_AUTO_GENERATION" ReturnType="Collection(BeautyShopModel.Record_AUTO_GENERATION_Result)" />
+          <FunctionImport Name="Record_DELETE">
+            <Parameter Name="key" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Record_INSERT">
+            <Parameter Name="Id_services" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Employee" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Clients" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Time" Mode="In" Type="Time" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Record_SELECT" ReturnType="Collection(BeautyShopModel.Record_SELECT_Result)" />
+          <FunctionImport Name="Record_UPDATE">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Id_services" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Employee" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Clients" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Time" Mode="In" Type="Time" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Services_DELETE">
+            <Parameter Name="key" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Services_INSERT">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="Price" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Services_SELECT" ReturnType="Collection(BeautyShopModel.Services_SELECT_Result)" />
+          <FunctionImport Name="Services_UPDATE">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="Price" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP1" ReturnType="Collection(BeautyShopModel.SP1_Result)">
+            <Parameter Name="year" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP2" ReturnType="Collection(BeautyShopModel.SP2_Result)">
+            <Parameter Name="letter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Work_AUTO_GENERATION" ReturnType="Collection(BeautyShopModel.Work_AUTO_GENERATION_Result)" />
+          <FunctionImport Name="Work_DELETE">
+            <Parameter Name="key" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Work_INSERT">
+            <Parameter Name="Id_services" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Employee" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Clients" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Time" Mode="In" Type="Time" />
+            <Parameter Name="Income" Mode="In" Type="Double" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Work_SELECT" ReturnType="Collection(BeautyShopModel.Work_SELECT_Result)" />
+          <FunctionImport Name="Work_UPDATE">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Id_services" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Employee" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Clients" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Time" Mode="In" Type="Time" />
+            <Parameter Name="Income" Mode="In" Type="Double" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Clients_SELECT_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="Middle" Nullable="true" MaxLength="45" />
+          <Property Type="DateTime" Name="Birhdate" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="Phone" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Employee_SELECT_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="Middle" Nullable="true" MaxLength="45" />
+          <Property Type="Decimal" Name="Phone" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="Birhdate" Nullable="true" />
+          <Property Type="String" Name="Post" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Record_AUTO_GENERATION_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Id_Services" Nullable="false" />
+          <Property Type="Int32" Name="Id_Employee" Nullable="false" />
+          <Property Type="Int32" Name="Id_Clients" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Record_SELECT_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Id_Services" Nullable="false" />
+          <Property Type="Int32" Name="Id_Employee" Nullable="false" />
+          <Property Type="Int32" Name="Id_Clients" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Services_SELECT_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="Price" Nullable="false" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="SP1_Result">
+          <Property Type="Int32" Name="Id_Services" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP2_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="45" />
+          <Property Type="Int32" Name="MaxAgeClients" Nullable="true" />
+          <Property Type="Int32" Name="MinAgeClients" Nullable="true" />
+          <Property Type="Int32" Name="CountRecordClients" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Work_AUTO_GENERATION_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Id_Services" Nullable="false" />
+          <Property Type="Int32" Name="Id_Employee" Nullable="false" />
+          <Property Type="Int32" Name="Id_Clients" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="Double" Name="Income" Nullable="false" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Work_SELECT_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Id_Services" Nullable="false" />
+          <Property Type="Int32" Name="Id_Employee" Nullable="false" />
+          <Property Type="Int32" Name="Id_Clients" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="Double" Name="Income" Nullable="false" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BeautyShopModelContainer" CdmEntityContainer="BeautyShopEntities1">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BeautyShopModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Middle" ColumnName="Middle" />
+                <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="BeautyShopModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Middle" ColumnName="Middle" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Record">
+            <EntityTypeMapping TypeName="BeautyShopModel.Record">
+              <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="BeautyShopModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="BeautyShopModel.Services">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Хранилище BeautyShopModel.Services_INSERT">
+                  <ScalarProperty Name="Price" ParameterName="Price" />
+                  <ScalarProperty Name="Comment" ParameterName="Comment" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Хранилище BeautyShopModel.Services_UPDATE">
+                  <ScalarProperty Name="Price" ParameterName="Price" Version="Current" />
+                  <ScalarProperty Name="Comment" ParameterName="Comment" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="Id" ParameterName="Id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="Хранилище BeautyShopModel.Services_DELETE" >
+                  <ScalarProperty Name="Id" ParameterName="key" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Work">
+            <EntityTypeMapping TypeName="BeautyShopModel.Work">
+              <MappingFragment StoreEntitySet="Work">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Clients_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Clients_AUTO_GENERATION" />
+          <FunctionImportMapping FunctionImportName="Clients_DELETE" FunctionName="Хранилище BeautyShopModel.Clients_DELETE" />
+          <FunctionImportMapping FunctionImportName="Clients_INSERT" FunctionName="Хранилище BeautyShopModel.Clients_INSERT" />
+          <FunctionImportMapping FunctionImportName="Clients_SELECT" FunctionName="Хранилище BeautyShopModel.Clients_SELECT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Clients_SELECT_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Middle" ColumnName="Middle" />
+                <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Clients_UPDATE" FunctionName="Хранилище BeautyShopModel.Clients_UPDATE" />
+          <FunctionImportMapping FunctionImportName="Employee_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Employee_AUTO_GENERATION" />
+          <FunctionImportMapping FunctionImportName="Employee_DELETE" FunctionName="Хранилище BeautyShopModel.Employee_DELETE" />
+          <FunctionImportMapping FunctionImportName="Employee_INSERT" FunctionName="Хранилище BeautyShopModel.Employee_INSERT" />
+          <FunctionImportMapping FunctionImportName="Employee_SELECT" FunctionName="Хранилище BeautyShopModel.Employee_SELECT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Employee_SELECT_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Middle" ColumnName="Middle" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Employee_UPDATE" FunctionName="Хранилище BeautyShopModel.Employee_UPDATE" />
+          <FunctionImportMapping FunctionImportName="Generation_Email" FunctionName="Хранилище BeautyShopModel.Generation_Email" />
+          <FunctionImportMapping FunctionImportName="Record_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Record_AUTO_GENERATION">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Record_AUTO_GENERATION_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Record_DELETE" FunctionName="Хранилище BeautyShopModel.Record_DELETE" />
+          <FunctionImportMapping FunctionImportName="Record_INSERT" FunctionName="Хранилище BeautyShopModel.Record_INSERT" />
+          <FunctionImportMapping FunctionImportName="Record_SELECT" FunctionName="Хранилище BeautyShopModel.Record_SELECT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Record_SELECT_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Record_UPDATE" FunctionName="Хранилище BeautyShopModel.Record_UPDATE" />
+          <FunctionImportMapping FunctionImportName="Services_DELETE" FunctionName="Хранилище BeautyShopModel.Services_DELETE" />
+          <FunctionImportMapping FunctionImportName="Services_INSERT" FunctionName="Хранилище BeautyShopModel.Services_INSERT" />
+          <FunctionImportMapping FunctionImportName="Services_SELECT" FunctionName="Хранилище BeautyShopModel.Services_SELECT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Services_SELECT_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Services_UPDATE" FunctionName="Хранилище BeautyShopModel.Services_UPDATE" />
+          <FunctionImportMapping FunctionImportName="SP1" FunctionName="Хранилище BeautyShopModel.SP1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.SP1_Result">
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP2" FunctionName="Хранилище BeautyShopModel.SP2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.SP2_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaxAgeClients" ColumnName="MaxAgeClients" />
+                <ScalarProperty Name="MinAgeClients" ColumnName="MinAgeClients" />
+                <ScalarProperty Name="CountRecordClients" ColumnName="CountRecordClients" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Work_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Work_AUTO_GENERATION">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Work_AUTO_GENERATION_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Work_DELETE" FunctionName="Хранилище BeautyShopModel.Work_DELETE" />
+          <FunctionImportMapping FunctionImportName="Work_INSERT" FunctionName="Хранилище BeautyShopModel.Work_INSERT" />
+          <FunctionImportMapping FunctionImportName="Work_SELECT" FunctionName="Хранилище BeautyShopModel.Work_SELECT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BeautyShopModel.Work_SELECT_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Work_UPDATE" FunctionName="Хранилище BeautyShopModel.Work_UPDATE" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,71 @@
+﻿@model PagedList.IPagedList<Web1.Models.SP2_Result>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Статистика по сотрудникам</h2>
+
+@using (Html.BeginForm("Details", "StatisticsEmployees", FormMethod.Get))
+{
+    <div class="col-auto">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color row">
+                <div class="input-group mb-3">
+                    <input type="text" id="SearchString" name="SearchString" class="form-control" placeholder="Буква" aria-label="Введите букву">
+                    <input type="submit" value="Поиск" class="btn btn-outline-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}
+
+
+@if (!TempData["msg"].Equals(""))
+{
+    <h1>Результатов не найдено </h1>
+}
+
+@if (TempData["msg"].Equals(""))
+{
+    <table class="table">
+        <tr>
+            <th>
+                Имя сотрудника
+            </th>
+            <th>
+                Максимальный возраст клиента
+            </th>
+            <th>
+                Минимальный возраст клиента
+            </th>
+            <th>
+                Количество записанных клиентов
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+                <td> @Html.DisplayFor(modelItem => item.MaxAgeClients)</td>
+                <td> @Html.DisplayFor(modelItem => item.MinAgeClients)</td>
+                <td> @Html.DisplayFor(modelItem => item.CountRecordClients)</td>
+            </tr>
+        }
+    </table>
+
+    <div class="row">
+        <div class="col-auto">
+            <form asp-action="Index" method="get">
+                @Html.PagedListPager(Model, page => Url.Action("Details", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentFilter1 = ViewBag.CurrentFilter1 }))
+            </form>
+        </div>
+        <div class="col-auto align-self-center">
+            <span class="align-middle">Страница:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)  из  @Model.PageCount</span>
+        </div>
+    </div>
+}

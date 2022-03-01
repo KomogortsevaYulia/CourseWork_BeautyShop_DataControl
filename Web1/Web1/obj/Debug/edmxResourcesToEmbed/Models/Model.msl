@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище BeautyShopModelContainer" CdmEntityContainer="BeautyShopEntitie">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="BeautyShopModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Middle" ColumnName="Middle" />
+          <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="BeautyShopModel.Clients">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="Хранилище BeautyShopModel.Clients_DELETE">
+            <ScalarProperty Name="Id" ParameterName="key" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="Хранилище BeautyShopModel.Clients_UPDATE">
+            <ScalarProperty Name="Comment" ParameterName="inComment" Version="Current" />
+            <ScalarProperty Name="Phone" ParameterName="inPhone" Version="Current" />
+            <ScalarProperty Name="Email" ParameterName="inEmail" Version="Current" />
+            <ScalarProperty Name="Birhdate" ParameterName="inBirhdate" Version="Current" />
+            <ScalarProperty Name="Middle" ParameterName="inMiddle" Version="Current" />
+            <ScalarProperty Name="Name" ParameterName="inName" Version="Current" />
+            <ScalarProperty Name="Name" ParameterName="inName" Version="Current" />
+            <ScalarProperty Name="Surname" ParameterName="inSurname" Version="Current" />
+            <ScalarProperty Name="Id" ParameterName="inId" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="Хранилище BeautyShopModel.Clients_INSERT">
+            <ScalarProperty Name="Comment" ParameterName="inComment" />
+            <ScalarProperty Name="Comment" ParameterName="inComment" />
+            <ScalarProperty Name="Phone" ParameterName="inPhone" />
+            <ScalarProperty Name="Email" ParameterName="inEmail" />
+            <ScalarProperty Name="Birhdate" ParameterName="inBirhdate" />
+            <ScalarProperty Name="Middle" ParameterName="inMiddle" />
+            <ScalarProperty Name="Name" ParameterName="inName" />
+            <ScalarProperty Name="Surname" ParameterName="inSurname" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="BeautyShopModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Middle" ColumnName="Middle" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+          <ScalarProperty Name="Post" ColumnName="Post" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="BeautyShopModel.Employee">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="Хранилище BeautyShopModel.Employee_DELETE">
+            <ScalarProperty Name="Id" ParameterName="key" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="Хранилище BeautyShopModel.Employee_UPDATE">
+            <ScalarProperty Name="Comment" ParameterName="inComment" Version="Current" />
+            <ScalarProperty Name="Phone" ParameterName="inPhone" Version="Current" />
+            <ScalarProperty Name="Post" ParameterName="inPost" Version="Current" />
+            <ScalarProperty Name="Birhdate" ParameterName="inBirhdate" Version="Current" />
+            <ScalarProperty Name="Middle" ParameterName="inMiddle" Version="Current" />
+            <ScalarProperty Name="Name" ParameterName="inName" Version="Current" />
+            <ScalarProperty Name="Surname" ParameterName="inSurname" Version="Current" />
+            <ScalarProperty Name="Id" ParameterName="inId" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="Хранилище BeautyShopModel.Employee_INSERT">
+            <ScalarProperty Name="Comment" ParameterName="inComment" />
+            <ScalarProperty Name="Post" ParameterName="inPost" />
+            <ScalarProperty Name="Birhdate" ParameterName="inBirhdate" />
+            <ScalarProperty Name="Phone" ParameterName="inPhone" />
+            <ScalarProperty Name="Middle" ParameterName="inMiddle" />
+            <ScalarProperty Name="Name" ParameterName="inName" />
+            <ScalarProperty Name="Surname" ParameterName="inSurname" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Record">
+      <EntityTypeMapping TypeName="BeautyShopModel.Record">
+        <MappingFragment StoreEntitySet="Record">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+          <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="BeautyShopModel.Record">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="Хранилище BeautyShopModel.Record_DELETE">
+            <ScalarProperty Name="Id" ParameterName="key" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="Хранилище BeautyShopModel.Record_UPDATE">
+            <ScalarProperty Name="Id_Services" ParameterName="Id_services" Version="Current" />
+            <ScalarProperty Name="Comment" ParameterName="Comment" Version="Current" />
+            <ScalarProperty Name="Time" ParameterName="Time" Version="Current" />
+            <ScalarProperty Name="Date" ParameterName="Date" Version="Current" />
+            <ScalarProperty Name="Id_Clients" ParameterName="Id_Clients" Version="Current" />
+            <ScalarProperty Name="Id_Employee" ParameterName="Id_Employee" Version="Current" />
+            <ScalarProperty Name="Id" ParameterName="Id" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="Хранилище BeautyShopModel.Record_INSERT">
+            <ScalarProperty Name="Id_Services" ParameterName="Id_services" />
+            <ScalarProperty Name="Comment" ParameterName="Comment" />
+            <ScalarProperty Name="Time" ParameterName="Time" />
+            <ScalarProperty Name="Date" ParameterName="Date" />
+            <ScalarProperty Name="Id_Clients" ParameterName="Id_Clients" />
+            <ScalarProperty Name="Id_Employee" ParameterName="Id_Employee" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="BeautyShopModel.Services">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="BeautyShopModel.Services">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="Хранилище BeautyShopModel.Services_DELETE">
+            <ScalarProperty Name="Id" ParameterName="key" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="Хранилище BeautyShopModel.Services_UPDATE">
+            <ScalarProperty Name="Price" ParameterName="Price" Version="Current" />
+            <ScalarProperty Name="Comment" ParameterName="Comment" Version="Current" />
+            <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="Id" ParameterName="Id" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="Хранилище BeautyShopModel.Services_INSERT">
+            <ScalarProperty Name="Price" ParameterName="Price" />
+            <ScalarProperty Name="Comment" ParameterName="Comment" />
+            <ScalarProperty Name="Name" ParameterName="Name" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Work">
+      <EntityTypeMapping TypeName="BeautyShopModel.Work">
+        <MappingFragment StoreEntitySet="Work">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+          <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Income" ColumnName="Income" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="BeautyShopModel.Work">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="Хранилище BeautyShopModel.Work_DELETE">
+            <ScalarProperty Name="Id" ParameterName="key" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="Хранилище BeautyShopModel.Work_UPDATE">
+            <ScalarProperty Name="Id_Services" ParameterName="Id_services" Version="Current" />
+            <ScalarProperty Name="Comment" ParameterName="Comment" Version="Current" />
+            <ScalarProperty Name="Income" ParameterName="Income" Version="Current" />
+            <ScalarProperty Name="Time" ParameterName="Time" Version="Current" />
+            <ScalarProperty Name="Date" ParameterName="Date" Version="Current" />
+            <ScalarProperty Name="Id_Clients" ParameterName="Id_Clients" Version="Current" />
+            <ScalarProperty Name="Id_Employee" ParameterName="Id_Employee" Version="Current" />
+            <ScalarProperty Name="Id" ParameterName="Id" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="Хранилище BeautyShopModel.Work_INSERT">
+            <ScalarProperty Name="Id_Services" ParameterName="Id_services" />
+            <ScalarProperty Name="Comment" ParameterName="Comment" />
+            <ScalarProperty Name="Income" ParameterName="Income" />
+            <ScalarProperty Name="Time" ParameterName="Time" />
+            <ScalarProperty Name="Date" ParameterName="Date" />
+            <ScalarProperty Name="Id_Clients" ParameterName="Id_Clients" />
+            <ScalarProperty Name="Id_Employee" ParameterName="Id_Employee" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Clients_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Clients_AUTO_GENERATION" />
+    <FunctionImportMapping FunctionImportName="Clients_DELETE" FunctionName="Хранилище BeautyShopModel.Clients_DELETE" />
+    <FunctionImportMapping FunctionImportName="Clients_INSERT" FunctionName="Хранилище BeautyShopModel.Clients_INSERT" />
+    <FunctionImportMapping FunctionImportName="Clients_SELECT" FunctionName="Хранилище BeautyShopModel.Clients_SELECT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Clients_SELECT_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Middle" ColumnName="Middle" />
+          <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Clients_UPDATE" FunctionName="Хранилище BeautyShopModel.Clients_UPDATE" />
+    <FunctionImportMapping FunctionImportName="Employee_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Employee_AUTO_GENERATION" />
+    <FunctionImportMapping FunctionImportName="Employee_DELETE" FunctionName="Хранилище BeautyShopModel.Employee_DELETE" />
+    <FunctionImportMapping FunctionImportName="Employee_INSERT" FunctionName="Хранилище BeautyShopModel.Employee_INSERT" />
+    <FunctionImportMapping FunctionImportName="Employee_SELECT" FunctionName="Хранилище BeautyShopModel.Employee_SELECT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Employee_SELECT_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Middle" ColumnName="Middle" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Birhdate" ColumnName="Birhdate" />
+          <ScalarProperty Name="Post" ColumnName="Post" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Employee_UPDATE" FunctionName="Хранилище BeautyShopModel.Employee_UPDATE" />
+    <FunctionImportMapping FunctionImportName="Generation_Email" FunctionName="Хранилище BeautyShopModel.Generation_Email" />
+    <FunctionImportMapping FunctionImportName="Record_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Record_AUTO_GENERATION">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Record_AUTO_GENERATION_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+          <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Record_DELETE" FunctionName="Хранилище BeautyShopModel.Record_DELETE" />
+    <FunctionImportMapping FunctionImportName="Record_INSERT" FunctionName="Хранилище BeautyShopModel.Record_INSERT" />
+    <FunctionImportMapping FunctionImportName="Record_SELECT" FunctionName="Хранилище BeautyShopModel.Record_SELECT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Record_SELECT_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+          <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Record_UPDATE" FunctionName="Хранилище BeautyShopModel.Record_UPDATE" />
+    <FunctionImportMapping FunctionImportName="Services_DELETE" FunctionName="Хранилище BeautyShopModel.Services_DELETE" />
+    <FunctionImportMapping FunctionImportName="Services_INSERT" FunctionName="Хранилище BeautyShopModel.Services_INSERT" />
+    <FunctionImportMapping FunctionImportName="Services_SELECT" FunctionName="Хранилище BeautyShopModel.Services_SELECT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Services_SELECT_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Services_UPDATE" FunctionName="Хранилище BeautyShopModel.Services_UPDATE" />
+    <FunctionImportMapping FunctionImportName="SP1" FunctionName="Хранилище BeautyShopModel.SP1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.SP1_Result">
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP2" FunctionName="Хранилище BeautyShopModel.SP2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.SP2_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MaxAgeClients" ColumnName="MaxAgeClients" />
+          <ScalarProperty Name="MinAgeClients" ColumnName="MinAgeClients" />
+          <ScalarProperty Name="CountRecordClients" ColumnName="CountRecordClients" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Work_AUTO_GENERATION" FunctionName="Хранилище BeautyShopModel.Work_AUTO_GENERATION">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Work_AUTO_GENERATION_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+          <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Income" ColumnName="Income" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Work_DELETE" FunctionName="Хранилище BeautyShopModel.Work_DELETE" />
+    <FunctionImportMapping FunctionImportName="Work_INSERT" FunctionName="Хранилище BeautyShopModel.Work_INSERT" />
+    <FunctionImportMapping FunctionImportName="Work_SELECT" FunctionName="Хранилище BeautyShopModel.Work_SELECT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BeautyShopModel.Work_SELECT_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_Services" ColumnName="Id_Services" />
+          <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+          <ScalarProperty Name="Id_Clients" ColumnName="Id_Clients" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Income" ColumnName="Income" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Work_UPDATE" FunctionName="Хранилище BeautyShopModel.Work_UPDATE" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <h2>Статистика по услугам</h2>
+
+    @using (Html.BeginForm("Details", "StatisticsServices", FormMethod.Get))
+    {
+        <div class="col-auto">
+            <form asp-action="Index" method="get">
+                <div class="form-actions no-color row">
+                    <div class="input-group mb-3">
+                        <input type="text" id="SearchString" name="SearchString" class="form-control" placeholder="Год" aria-label="Введите год">
+                        <input type="submit" value="Поиск" class="btn btn-outline-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    }
+    </div>
+
+

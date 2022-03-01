@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+
+<body class="p-0">
+    <script type="text/javascript">
+        function shineLinks(id) {
+            try {
+                var el = document.getElementById(id).getElementsByTagName('a');
+                var url = document.location.href;
+                for (var i = 0; i < el.length; i++) {
+                    var e = url.replace('' + el[i].origin + '', '');
+                    if (e == '/') {
+                        el[0].className += ' active';
+                    } else if (e.search(el[i].id) != -1) {
+                        el[i].className += ' active';
+                    };
+                };
+            } catch (e) { }
+        };
+    </script>
+    <div class="container-fluid ">
+        <div class="row flex-nowrap ">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100" id="menu-act">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Home",null)" id="/Home">
+                                Главная
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "Services",null)" id="/Services">
+                                Услуги
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "Employees",null)" id="/Employees">
+                                Сотрудники
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "Clients",null)" id="/Clients">
+                                Клиенты
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "Works",null)" id="/Works">
+                                Работы
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "Records",null)" id="/Records">
+                                Записи
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "StatisticsServices",null)" id="/StatisticsServices">
+                                Статистика по услугам
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="@Url.Action("Index", "StatisticsEmployees",null)" id="/StatisticsEmployees">
+                                Статистика по сотрудникам
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col py-3">
+                @RenderBody()
+                <script type="text/javascript">shineLinks('menu-act');</script>
+            </div>
+        </div>
+    </div>
+
+   
+    
+    @Scripts.Render("~/bundles/jquery-3.6.0.js")
+    @Scripts.Render("~/bundles/bootstrap.bundle.js")
+    @RenderSection("scripts", required: false)
+    @RenderSection("Serv", required: false)
+</body>
+</html >

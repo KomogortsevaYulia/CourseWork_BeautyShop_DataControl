@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca730a091ef34db4bca77f712c43773b" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="BeautyShopModel.Clients" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeautyShopModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeautyShopModel.Record" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeautyShopModel.Services" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BeautyShopModel.Work" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="BeautyShopModel.FK__Record__Id_Clien__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="BeautyShopModel.FK__Work__Id_Clients__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="BeautyShopModel.FK__Record__Id_Emplo__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="BeautyShopModel.FK__Work__Id_Employe__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="BeautyShopModel.FK__Record__Id_Servi__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="BeautyShopModel.FK__Work__Id_Service__300424B4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

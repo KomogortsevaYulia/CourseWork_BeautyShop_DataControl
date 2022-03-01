@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row  md-5">
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Create", "Records")">
+            Добавить запись
+        </a>
+    </div>
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Records")">
+            Записи
+        </a>
+    </div>
+</div>
+<br/>
+<div class="row me-5">
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Create", "Works")">
+            Добавить работу
+        </a>
+    </div>
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Works")">
+            Работы
+        </a>
+    </div>
+</div>
+<br />
+<div class="row me-5">
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Clients")">
+            Клиенты
+        </a>
+    </div>
+</div>
+<br />
+<div class="row me-5">
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Employees")">
+            Сотрудники
+        </a>
+    </div>
+</div>
+<br />
+<div class="row me-5">
+    <div class="col-auto">
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Services")">
+            Услуги
+        </a>
+    </div>
+</div>
